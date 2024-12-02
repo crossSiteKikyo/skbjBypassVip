@@ -15,10 +15,14 @@ function analyseURL() {
     // __NUXT_DATA__에서 mp4Name가 들어있다. 5개월 이상 된 옛날 방식인지 최근 방식인지 확인한다.
 	const searchFromObfuscatedRegex = new RegExp(`"https[\s\S]+?${mp4Name}"`, 'g');
     const result = document.querySelector('#__NUXT_DATA__').innerHTML.match(searchFromObfuscatedRegex);
-    // 결과가 없다면 옛날방식.
-    alert("옛날방식");
     // 결과가 있다면 최근방식.
-    alert("최근방식");
+    if(result) {
+        alert("최근방식");
+    }
+    // 결과가 없다면 옛날방식.
+    else {
+        alert("옛날방식");
+    }
 }
 
 skbjBypassVip();
