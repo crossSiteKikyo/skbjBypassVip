@@ -1,7 +1,4 @@
 function skbjBypassVip() {
-    analyseURL();
-}
-function analyseURL() {
     /* https://skbj.tv/videos/l2npo1xri1sr와 같이 영문숫자로만 되어있다면 볼 수 없다. 
     현재 해킹당하거나 영상이 내려간 것으로 보임. */
     if(/^https:\/\/skbj.tv\/videos\/[0-9a-zA-Z]+$/.test(window.location.href)) {
@@ -21,7 +18,7 @@ function analyseURL() {
     console.log(`result: ${result}`);
     // 결과가 있다면 외부 스트리밍방식.
     if(result) {
-        alert("외부 스트리밍 방식");
+        // alert("외부 스트리밍 방식");
         const videoSrc = result[0].replace(/[",]/g, "");
         console.log(videoSrc);
         //미리보기와 버튼 삭제후 video 태그 삽입.
@@ -29,7 +26,7 @@ function analyseURL() {
     }
     // 결과가 없다면 iframe.
     else {
-        alert("iframe방식");
+        // alert("iframe방식");
         // url에서 마지막 부분.
         const urlCode = window.location.href.match(/[^/]+$/g)[0];
         //미리보기와 버튼 삭제후 iframe삽입. src부분에 urlCode를 삽입하면 된다.
