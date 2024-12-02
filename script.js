@@ -19,17 +19,17 @@ function analyseURL() {
     console.log(`searchFromObfuscatedRegex: ${searchFromObfuscatedRegex}`);
     const result = document.querySelector('#__NUXT_DATA__').innerHTML.match(searchFromObfuscatedRegex);
     console.log(`result: ${result}`);
-    // 결과가 있다면 최근방식.
+    // 결과가 있다면 외부 스트리밍방식.
     if(result) {
-        alert("최근방식");
+        alert("외부 스트리밍 방식");
         const videoSrc = result[0].replace(/[",]/g, "");
         console.log(videoSrc);
         //미리보기와 버튼 삭제후 video 태그 삽입.
         document.querySelector('.player-wrapper.relative.bg-base-200').outerHTML=`<video src="${videoSrc}" style="width:100%;height:100%;" data-v-02e5f75f="" controls></video>`;
     }
-    // 결과가 없다면 옛날방식.
+    // 결과가 없다면 iframe.
     else {
-        alert("옛날방식");
+        alert("iframe방식");
         // url에서 마지막 부분.
         const urlCode = window.location.href.match(/[^/]+$/g)[0];
         //미리보기와 버튼 삭제후 iframe삽입. src부분에 urlCode를 삽입하면 된다.
