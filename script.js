@@ -5,7 +5,7 @@ function analyseURL() {
     /* https://skbj.tv/videos/l2npo1xri1sr와 같이 영문숫자로만 되어있다면 볼 수 없다. 
     현재 해킹당하거나 영상이 내려간 것으로 보임. */
     if(/^https:\/\/skbj.tv\/videos\/[0-9a-zA-Z]+$/.test(window.location.href)) {
-        alert("해당 영상은 볼 수 없습니다");
+        alert("해당 영상은 현재 볼 수 없습니다");
         return;
     }
 
@@ -22,6 +22,10 @@ function analyseURL() {
     // 결과가 없다면 옛날방식.
     else {
         alert("옛날방식");
+        // url에서 마지막 부분.
+        const urlCode = window.location.href.match(/[^/]+$/g)[0];
+        //미리보기와 버튼 삭제후 iframe삽입. src부분에 urlCode를 삽입하면 된다.
+        document.querySelector('.player-wrapper.relative.bg-base-200').innerHTML=`<iframe data-v-1fbe32a4="" id="custom-iframe" src="https://iframe.mediadelivery.net/embed/141502/${urlCode}" loading="lazy" class="main-player absolute bg-base-200 is-loaded" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture;" allowfullscreen=""></iframe>`;
     }
 }
 
