@@ -17,12 +17,12 @@ function analyseURL() {
     // __NUXT_DATA__에서 mp4Name가 들어있다. 5개월 이상 된 옛날 방식인지 최근 방식인지 확인한다.
 	const searchFromObfuscatedRegex = new RegExp(`"https[\\s\\S]+?${mp4Name}"`, 'g');
     console.log(`searchFromObfuscatedRegex: ${searchFromObfuscatedRegex}`);
-    const result = document.querySelector('#__NUXT_DATA__').innerHTML.match(searchFromObfuscatedRegex)[0];
+    const result = document.querySelector('#__NUXT_DATA__').innerHTML.match(searchFromObfuscatedRegex);
     console.log(`result: ${result}`);
     // 결과가 있다면 최근방식.
     if(result) {
         alert("최근방식");
-        const videoSrc = result.replace(/[",]/g, "");
+        const videoSrc = result[0].replace(/[",]/g, "");
         console.log(videoSrc);
         //미리보기와 버튼 삭제후 video 태그 삽입.
         document.querySelector('.player-wrapper.relative.bg-base-200').outerHTML=`<video src="${videoSrc}" style="width:100%;height:100%;" data-v-02e5f75f="" controls></video>`;
