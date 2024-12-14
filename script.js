@@ -16,13 +16,16 @@ function skbjBypassVip() {
     console.log(`searchFromObfuscatedRegex: ${searchFromObfuscatedRegex}`);
     const result = document.querySelector('#__NUXT_DATA__').innerHTML.match(searchFromObfuscatedRegex);
     console.log(`result: ${result}`);
+    // data-v- 속성이 제대로 맞지 않는다면 동영상 재생 ui가 제대로 화면에 표시되지 않음.
+    data_v_attr = document.querySelectorAll('.left-content')[0].getAttributeNames().find((val)=>{return val.startsWith('data-v-')});
+
     // 결과가 있다면 외부 스트리밍방식.
     if(result) {
         // alert("외부 스트리밍 방식");
         const videoSrc = result[0].replace(/[",]/g, "");
         console.log(videoSrc);
         //미리보기와 버튼 삭제후 video 태그 삽입.
-        document.querySelector('.player-wrapper.relative.bg-base-200').outerHTML=`<video src="${videoSrc}" style="width:100%;height:100%;" data-v-02e5f75f="" controls></video>`;
+        document.querySelector('.player-wrapper.relative.bg-base-200').outerHTML=`<video src="${videoSrc}" style="width:100%;height:100%;" ${data_v_attr}="" controls></video>`;
     }
     // 결과가 없다면 iframe.
     else {
@@ -30,7 +33,7 @@ function skbjBypassVip() {
         // url에서 마지막 부분.
         const urlCode = window.location.href.match(/[^/]+$/g)[0];
         //미리보기와 버튼 삭제후 iframe삽입. src부분에 urlCode를 삽입하면 된다.
-        document.querySelector('.player-wrapper.relative.bg-base-200').innerHTML=`<iframe data-v-1fbe32a4="" id="custom-iframe" src="https://iframe.mediadelivery.net/embed/141502/${urlCode}" loading="lazy" class="main-player absolute bg-base-200 is-loaded" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture;" allowfullscreen=""></iframe>`;
+        document.querySelector('.player-wrapper.relative.bg-base-200').innerHTML=`<iframe ${data_v_attr}="" id="custom-iframe" src="https://iframe.mediadelivery.net/embed/141502/${urlCode}" loading="lazy" class="main-player absolute bg-base-200 is-loaded" allow="accelerometer; gyroscope; encrypted-media; picture-in-picture;" allowfullscreen=""></iframe>`;
     }
 }
 
